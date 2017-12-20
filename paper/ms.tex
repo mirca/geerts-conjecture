@@ -59,10 +59,12 @@ information.
 
 Briefly, PSF photometry consists in fitting the parameters of the PSF
 (usually integrated flux and center positions), regardless of the nature of the
-PSF (discrete or continuous), to a given image. The $\chi^2$ statistic has been traditionally
-used to get the best parameters in the maximum likelihood estimation (MLE) sense.
+PSF (discrete or continuous), to a given image. In many scientific analsysis,
+due to implications of the Central Limit Theorem~\citep{grimmett:2001}, the
+$\chi^2$ statistic has been traditionally and successfully used to get the best
+parameters in the maximum likelihood estimation (MLE) sense.
 
-In this letter, we advocate that the $\chi^2$ statistic might not be adequate for PSF
+However, in this letter, we advocate that the $\chi^2$ statistic might not be adequate for PSF
 photometry for two main reasons: (I) the assumption of Gaussian distributed data is only
 compatible with the nature of pixel data, i.e., positive integer values, in an assymptotic sense;
 (II) $\chi^2$ statistic yields a maximum likelihood estimator for the total number of counts
@@ -116,20 +118,35 @@ that $\sum_{i=1}^{n}\psi_i(\bm{x})=1$.
 
 Therefore,
 \begin{equation}
-    \dfrac{\partial{\lambda_i(\bm{\theta})}}{\partial \alpha} = \psi_i(\bm{x}).
+    \dfrac{\partial{\lambda_i(\bm{\theta})}}{\partial \alpha} = \psi_i(\bm{x}),
     \label{eq:partial_flux}
 \end{equation}
+and
+\begin{equation}
+    \dfrac{\partial^2{\lambda_i(\bm{\theta})}}{\partial \alpha^2} = 0.
+    \label{eq:partial2_flux}
+\end{equation}
+
 
 Substituting (\ref{eq:psf_model}) and (\ref{eq:partial_flux}) into (\ref{eq:partial_eqs}), it follows that
 \begin{align}
     \sum_{i=1}^{n} \psi_i(\bm{x}^{*})\left(1 - \dfrac{y_i}{\alpha^{*}\cdot\psi_i(\bm{x}^{*})} \right) &= \sum_{i=1}^{n} \left(\psi_i(\bm{x}^{*}) -  \dfrac{y_i}{\alpha^{*}}\right) = 0 \\
     & \Leftrightarrow \nonumber\\
-    \alpha^{*} &= \sum_{i=1}^{n} y_i,
+    \alpha^{*} &= \sum_{i=1}^{n} y_i.
     \label{eq:tada}
+\end{align}
+
+Furthermore, computing the derivative of the left hand side of~(\ref{eq:partial_eqs}), \textit{i.e.}, the second-order derivative of the log likelihood function, with respect to $\alpha$, and evaluating it at $\alpha^{*}$, it follows that
+\begin{align}
+    \sum_{i=1}^{n}\left\{\dfrac{\partial^2 \lambda_i\left(\bm{\theta}\right)}{\partial \alpha^2}
+    - \dfrac{y_i}{\lambda_i\left(\bm{\theta}\right)}\left[\dfrac{\partial^2 \lambda_i
+    \left(\bm{\theta}\right)}{\partial \alpha^2} - \dfrac{1}{\lambda_i\left(\bm{\theta}\right)}
+    \left(\dfrac{\partial \lambda_i\left(\bm{\theta}\right)}{\partial \alpha}\right)^2\right]\Bigr|_{\substack{\bm{\alpha}=\bm{\alpha}^{*}}}\right\} = \sum_{i=1}^{n}\dfrac{y_i}{\alpha^2}\Bigr|_{\substack{\bm{\alpha}=\bm{\alpha}^{*}}} = \dfrac{1}{\alpha^{*}} > 0
+    \label{eq:partial2_eqs}
 \end{align}
 which proves our proposition. Note that this result does not require any specific structural form of $\lambda_i$ other than it increases linearly with the total number of counts $\alpha$ for a given fixed position $\bm{x}$.
 
-Furthermore, the MLE for the total number of counts has the following nice properties: (\textrm{I}) it is an unbiased estimator and (\textrm{II}) its variance attains the minimum possible bound in the Fisher information sense. The first property may be verified by taking the expectation value of (\ref{eq:tada}), which follows that
+Furthermore, the MLE for the total number of counts has the following nice properties: (\textrm{I}) it is an unbiased estimator and (\textrm{II}) its variance attains the minimum possible bound (Cram\'er-Rao Lower Bound~\citep{bobrovsky:1987}) in the Fisher information sense. The first property may be verified by taking the expectation value of (\ref{eq:tada}), which follows that
 \begin{equation}
     \mathbb{E}\left[\alpha^{*}\right] = \sum_{i=1}^{n}\mathbb{E}[Y_i] = \sum_{i=1}^{n} \lambda_i(\bm{\theta}) = \sum_{i=1}^{n} \alpha\cdot\psi_i(\bm{x}) = \alpha.
 \end{equation}
@@ -149,7 +166,7 @@ As a practical exercise, we apply PSF photometry on EPIC 2307199
     \caption{(left): cadence \#2000 of EPIC 230719 from NASA's Kepler Mission. (right): residuals per cadence of PSF photometry using Poisson Likelihood (red) and Gaussian Likelihood (blue).}
 \end{figure}
 
-The code is available at:
+The code is available at: \url{https://www.github.com/mirca/geerts-conjecture}.
 
 \acknowledgments We would like to thank. This work acknowledges the use of the following computational tools: numpy, scipy, astropy, pyke, oktopus, and jupyter.
 
@@ -157,6 +174,7 @@ The code is available at:
     \bibitem[Heasley(1999)]{heasley:1999} Heasley, J.~N., Point-Spread Function Fitting Photometry, 1999, Astronomical Society of the Pacific Conference Series.
     \bibitem[Grimmet et al.(2001)]{grimmett:2001} Grimmett, R.~G., Stirzaker D.~R., Probability and Random Processes, 2001, Oxford University Press.
     \bibitem[Poor et al.(1998)]{poor:1998} Poor, H.~V., An Introduction to Signal Detection and Estimation, 1998, Springer.
+    \bibitem[Bobrovsky et al. (1987)]{bobrovsky:1987} Bobrovsky, B.~Z., Mayer-Wolf E., Zakai M., Some Classes of Global Cram\'er-Rao Bounds, 1987, The Annals of Statistics, Vol. 15, No. 4, 1421 -- 1438.
 \end{thebibliography}
 
 \end{document}
