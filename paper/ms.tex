@@ -124,21 +124,14 @@ that $\sum_{i=1}^{n}\psi_i(\bm{x})=1$.
 
 Therefore,
 \begin{equation}
-    \dfrac{\partial{\lambda_i(\bm{\theta})}}{\partial \alpha} = \psi_i(\bm{x}),
+    \dfrac{\partial{\lambda_i(\bm{\theta})}}{\partial \alpha} = \psi_i(\bm{x})~\text{and}~
+    \dfrac{\partial^2{\lambda_i(\bm{\theta})}}{\partial \alpha^2} = 0.
     \label{eq:partial_flux}
 \end{equation}
-and
-\begin{equation}
-    \dfrac{\partial^2{\lambda_i(\bm{\theta})}}{\partial \alpha^2} = 0.
-    \label{eq:partial2_flux}
-\end{equation}
-
 
 Substituting (\ref{eq:psf_model}) and (\ref{eq:partial_flux}) into (\ref{eq:partial_eqs}), it follows that
 \begin{align}
-    \sum_{i=1}^{n} \psi_i(\bm{x}^{*})\left(1 - \dfrac{y_i}{\alpha^{*}\cdot\psi_i(\bm{x}^{*})} \right) &= \sum_{i=1}^{n} \left(\psi_i(\bm{x}^{*}) -  \dfrac{y_i}{\alpha^{*}}\right) = 0 \\
-    & \Leftrightarrow \nonumber\\
-    \alpha^{*} &= \sum_{i=1}^{n} y_i.
+    \sum_{i=1}^{n} \psi_i(\bm{x}^{*})\left(1 - \dfrac{y_i}{\alpha^{*}\cdot\psi_i(\bm{x}^{*})} \right) &= \sum_{i=1}^{n} \left(\psi_i(\bm{x}^{*}) -  \dfrac{y_i}{\alpha^{*}}\right) = 0~~~\Leftrightarrow~~~\alpha^{*} = \sum_{i=1}^{n} y_i.
     \label{eq:tada}
 \end{align}
 
@@ -170,17 +163,26 @@ However, for pixels at the tail of the PSF or low signal-to-noise targets, where
 
 As a practical exercise, we apply PSF photometry on the target \texttt{EPIC10053146} of NASA's Kepler Mission. \texttt{EPIC10053146} is a 20th magnitude isolated star. NASA's Kepler data on \texttt{EPIC10053146} has measured an average flux of $260 e^{-}/s$ in the brightest pixel.
 
-Using the assumption that the data is Poisson distributed, we obtain a mean residual value at the two brightest pixels across 4000 cadences of $9.35 \rpm 4.45 e^{-}/s$. The same analysis with Gaussian likelihood assumption yields $10.11 \rpm 5.76 e^{-}/s$. The mean residuals considering all 30 pixels was $-2.25\cdot 10^{-5} \rpm 12.58e^{-}/s$, and $0.99 \rpm 12.59 e^{-}/s$ for the Poisson and Gaussian assumptions, respectively.
+Using the assumption that the data is Poisson distributed, we obtain a mean residual value at
+the two brightest pixels across 4000 cadences of $9.35~\rpm~4.45~e^{-}/s$. The same analysis
+with Gaussian likelihood assumption yields $10.11~\rpm~5.76~e^{-}/s$. The mean residuals
+considering all 30 pixels was $-2.25\cdot 10^{-5}~\rpm~12.58e^{-}/s$, and $0.99~\rpm~12.59 e^{-}/s$
+for the Poisson and Gaussian assumptions, respectively.
 
+\acknowledgments We would like to thank... This work acknowledges the use of the following computational tools: \texttt{numpy}~\citep{numpy}, \texttt{scipy}~\citep{scipy}, \texttt{astropy}~\citep{astropy}, \texttt{pyke}~\citep{pyke}, and \texttt{jupyter}~\citep{jupyter}.
 The code is available at: \url{https://www.github.com/mirca/geerts-conjecture}.
-
-\acknowledgments We would like to thank... This work acknowledges the use of the following computational tools: \texttt{numpy}\citep{}, \texttt{scipy}\citep{}, \texttt{astropy}\citep{}, \texttt{pyke}, \texttt{oktopus}\citep{}, and \texttt{jupyter}\citep{}.
 
 \begin{thebibliography}{}
     \bibitem[Heasley(1999)]{heasley:1999} Heasley, J.~N., Point-Spread Function Fitting Photometry, 1999, Astronomical Society of the Pacific Conference Series.
     \bibitem[Grimmet et al.(2001)]{grimmett:2001} Grimmett, R.~G., Stirzaker D.~R., Probability and Random Processes, 2001, Oxford University Press.
     \bibitem[Poor et al.(1998)]{poor:1998} Poor, H.~V., An Introduction to Signal Detection and Estimation, 1998, Springer.
     \bibitem[Bobrovsky et al. (1987)]{bobrovsky:1987} Bobrovsky, B.~Z., Mayer-Wolf E., Zakai M., Some Classes of Global Cram\'er-Rao Bounds, 1987, The Annals of Statistics, Vol. 15, No. 4, 1421 -- 1438.
+    \bibitem[Jones et al. (2001)]{scipy} Jones, E., Oliphant T., Peterson P., et al., \texttt{SciPy}: Open source scientific tools for \texttt{Python}.
+    \bibitem[van der Walt et al. (2011)]{numpy} van der Walt S., Colbert S.~C., Varoquaux G., The NumPy Array: a structure for efficient numerical computation, 2011, Computing in Science \& Engineering, 13, 22--30.
+    \bibitem[Hunter (2007)]{matplotlib} Hunter, J. D., Matplotlib: A 2D graphic environment, 2007, Computing in Science \& Engineering, 9, 90--95.
+    \bibitem[AstroPy Project (2017)]{astropy} AstroPy Project, Submitted to ApJ, 2017.
+    \bibitem[PyKE Contributors (2017)]{pyke} PyKE Contributors, PyKE: Kepler, K2 \& TESS Data Analysis Tools, 2017, \url{http://doi.org/10.5281/zenodo.835584}.
+    \bibitem[Perez et al. (2007)]{jupyter} P\'erez F., Granger B.~E., \texttt{IPython}: a system for interactive scientific computing, 2007, Computing in Science and Engineering, 9, 21--29.
 \end{thebibliography}
 
 \end{document}
