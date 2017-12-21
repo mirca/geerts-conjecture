@@ -6,6 +6,8 @@
 
 \newcommand{\todo}[3]{{\color{#2} \emph{#1} TO DO: #3}}
 \newcommand{\zetodo}[1]{\todo{ZE}{cyan}{#1}}
+\newcommand{\rpm}{\sbox0{$1$}\sbox2{$\scriptstyle\pm$}
+\raise\dimexpr(\ht0-\ht2)/2\relax\box2 }
 
 %% Define new commands here
 \newcommand\latex{La\TeX}
@@ -162,7 +164,13 @@ Note that, under the widely adopted assumption that the data is Gaussian distrib
 \end{equation}
 for which, properties (I) and (II) do not hold in an non-asymptotic sense.
 
-As a practical exercise, we apply PSF photometry on EPIC 2307199...
+It is worth noticing that, whenever the number of counts is high (which often is the case around the center of the PSF), the Poisson density does converge to a Gaussian density, and therefore those two approaches are equivalent.
+
+However, for pixels at the tail of the PSF or low signal-to-noise targets, where the number of counts is small, the Gaussian approximation might yield residuals that are nonnegligeble for practical scenarios such as transit photometry.
+
+As a practical exercise, we apply PSF photometry on the target \texttt{EPIC10053146} of NASA's Kepler Mission. \texttt{EPIC10053146} is a 20th magnitude isolated star. NASA's Kepler data on \texttt{EPIC10053146} has measured an average flux of $260 e^{-}/s$ in the brightest pixel.
+
+Using the assumption that the data is Poisson distributed, we obtain a mean residual value at the two brightest pixels across 4000 cadences of $9.35 \rpm 4.45 e^{-}/s$. The same analysis with Gaussian likelihood assumption yields $10.11 \rpm 5.76 e^{-}/s$. The mean residuals considering all 30 pixels was $-2.25\cdot 10^{-5} \rpm 12.58e^{-}/s$, and $0.99 \rpm 12.59 e^{-}/s$ for the Poisson and Gaussian assumptions, respectively.
 
 The code is available at: \url{https://www.github.com/mirca/geerts-conjecture}.
 
