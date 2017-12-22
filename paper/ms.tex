@@ -112,8 +112,6 @@ which inevitably requires the solution of the following system of differential e
     \label{eq:partial_eqs}
 \end{equation}
 
-As far as the authors are concerned, such a system does not have an analytical solution even for simple PSF models such as Gaussian or Moffat. However, the existence of an MLE is guaranteed since the parameter space is compact and the likelihood function is continuous as a function of $\bm{\theta}$~\citep{poor:1998}.
-
 Now, assume that the vector of stellar parameters $\bm{\theta}$ takes the following form $\bm{\theta} \triangleq (\alpha, \bm{x})$, where $\alpha$ is the total number of counts and $\bm{x} \triangleq (x_1, x_2)$ is the coordinate of the center of the PSF. Further, assume that the PSF model can be factorized as follows
 \begin{equation}
     \lambda_i(\bm{\theta}) = \alpha\cdot\psi_i(\bm{x}),
@@ -175,7 +173,6 @@ The code is available at: \url{https://www.github.com/mirca/geerts-conjecture}.
 \begin{thebibliography}{}
     \bibitem[Heasley(1999)]{heasley:1999} Heasley, J.~N., Point-Spread Function Fitting Photometry, 1999, Astronomical Society of the Pacific Conference Series.
     \bibitem[Grimmet et al.(2001)]{grimmett:2001} Grimmett, R.~G., Stirzaker D.~R., Probability and Random Processes, 2001, Oxford University Press.
-    \bibitem[Poor et al.(1998)]{poor:1998} Poor, H.~V., An Introduction to Signal Detection and Estimation, 1998, Springer.
     \bibitem[Bobrovsky et al. (1987)]{bobrovsky:1987} Bobrovsky, B.~Z., Mayer-Wolf E., Zakai M., Some Classes of Global Cram\'er-Rao Bounds, 1987, The Annals of Statistics, Vol. 15, No. 4, 1421 -- 1438.
     \bibitem[Jones et al. (2001)]{scipy} Jones, E., Oliphant T., Peterson P., et al., \texttt{SciPy}: Open source scientific tools for \texttt{Python}.
     \bibitem[van der Walt et al. (2011)]{numpy} van der Walt S., Colbert S.~C., Varoquaux G., The NumPy Array: a structure for efficient numerical computation, 2011, Computing in Science \& Engineering, 13, 22--30.
