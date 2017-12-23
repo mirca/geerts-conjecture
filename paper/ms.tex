@@ -102,13 +102,13 @@ Perhaps of more practical interest is the log likelihood function
     \log P(\bm{Y} = \bm{y} | \bm{\Theta} = \bm{\theta}) = \sum_{i=1}^{n}\left(- \lambda_i(\bm{\theta}) + y_i\log\lambda_i(\bm{\theta}) - \log y_i !\right).
 \end{equation}
 
-Then, the MLE can be stated as the following optimization problem
+Then, the MLE can be formulated as the following optimization problem
 \begin{align}
-    \bm{\theta}^{*} = \argmin_{\bm{\theta} \in \Lambda} \sum_{i=1}^{n}\left(\lambda_i(\bm{\theta}) - y_i\log\lambda_i(\bm{\theta})\right),
+    \bm{\theta}^{*}(\bm{y}) = \argmin_{\bm{\theta} \in \Lambda} \sum_{i=1}^{n}\left(\lambda_i(\bm{\theta}) - y_i\log\lambda_i(\bm{\theta})\right),
 \end{align}
 which inevitably requires the solution of the following system of differential equations
 \begin{equation}
-    \sum_{i=1}^{n}\dfrac{\partial \lambda_i(\bm{\theta})}{\partial \theta_j}\left(1 - \dfrac{y_i}{\lambda_i(\bm{\theta})} \right)\Bigr|_{\substack{\bm{\theta}=\bm{\theta}^{*}}} = 0,~\mathrm{for}~j=1, 2, ..., m.
+    \sum_{i=1}^{n}\dfrac{\partial \lambda_i(\bm{\theta})}{\partial \theta_j}\left(1 - \dfrac{y_i}{\lambda_i(\bm{\theta})} \right)\Bigr|_{\substack{\bm{\theta}=\bm{\theta}^{*}(\bm{y})}} = 0,~\mathrm{for}~j=1, 2, ..., m.
     \label{eq:partial_eqs}
 \end{equation}
 
