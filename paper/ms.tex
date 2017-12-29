@@ -52,29 +52,31 @@ Chicago, 5640 S. Ellis Ave, Chicago, IL 60637, USA}
 \section{Introduction}
 
 Stellar photometry from charged-couple devices is at the core of astronomical
-observations. Often is the case where the astronomical object of interest is isolated
+observations. Often it is the case where the astronomical object of interest is isolated
 and photometry can be performed by carefully selecting an aperture around the object
-and summing up the pixel values, procedure known as aperture photometry. In crowded regions,
+and summing up the pixel values, a procedure known as aperture photometry. In crowded regions,
 conversely, targets are not disjoint and therefore one has to employ point spread
 function (PSF) photometry in order to obtain meaningful information about the targets
-of interest~\citep{heasley:1999}. Nonetheless, PSF photometry may as well be applied to
+of interest~\citep{heasley:1999}. PSF photometry can also be applied to
 isolated targets in order to obtain not only photometry, but also precise positional
 information.
 
 \section{PSF Photometry as a Probabilistic Estimation Problem}
 
-Briefly, PSF photometry consists in fitting the parameters of the PSF
+PSF photometry consists of fitting the parameters of the PSF
 (usually integrated flux and center positions), regardless of the nature of the
 PSF (discrete or continuous), to a given image. In many scientific analsysis,
 due to implications of the Central Limit Theorem~\citep{grimmett:2001}, the
-$\chi^2$ statistic has been traditionally and successfully used to get the best
-parameters in the maximum likelihood estimation (MLE) sense.
+$\chi^2$ statistic has been traditionally and successfully used to estimate
+maximum likelihood (ML) parameters.
 
-However, in this letter, we advocate that the $\chi^2$ statistic might not be adequate for PSF
-photometry for two main reasons: (I) the assumption of Gaussian distributed data is only
-compatible with the nature of pixel data, i.e., positive integer values, in an assymptotic sense;
-(II) $\chi^2$ statistic yields a maximum likelihood estimator for the total number of counts
-which is biased, and therefore it is only compatible with aperture photometry in an assymptotic sense.
+In this letter, we advocate that
+the $\chi^2$ statistic might not be adequate for PSF photometry for two main
+reasons: (I) the assumption of Gaussian distributed data is only compatible with
+the nature of pixel data, i.e., positive integer values, in an assymptotic
+sense; (II) the $\chi^2$ statistic yields a maximum likelihood estimator for the
+total number of counts which is biased, and therefore it is only compatible
+with aperture photometry in an assymptotic sense.
 
 On the other hand, we report that under Poissonian data distributed assumption, and for a very
 general family of PSF models including, e.g., Gaussian models and discrete models,
@@ -84,17 +86,17 @@ valid, e.g., if Gaussian distributed data is assumed.
 
 We begin by stating the underlying statistical assumptions.
 Consider an experiment that outputs a stellar image as a collection of $n$ independent \emph{non-identically}
-distributed random variables $\bm{Y} \triangleq \{Y_i\}_{i=1}^{n}$ (pixels), each of which has expected value
+distributed random variables $\bm{Y} \triangleq \{Y_i\}_{i=1}^{n}$ (pixels), such that
 $\mathbb{E}\left[Y_i\right] = \lambda_i(\bm{\Theta})$, in which $\lambda_i$ is the PSF model evaluated
 at the $i$-th pixel, and $\bm{\Theta}$ is a $\Lambda$-valued random vector, where
-$\Lambda \subseteq \mathbb{R}^m$ is a compact set that encodes the information about, say, total number
+$\Lambda \subseteq \mathbb{R}^p$ is a compact set that encodes the information about, say, the total number
 of counts and center positions of the PSF model.
 
 Assuming further that, for a given vector of stellar parameters $\bm{\Theta} = \bm{\theta}$,
 $Y_i$ follows a Poisson distribution, then the joint conditional likelihood function of a
 stellar image $\bm{Y}$ can be expressed as~\citep{grimmett:2001}
 \begin{align}
-    P(\bm{Y} = \bm{y} | \bm{\Theta} = \bm{\theta}) = \prod_{i=1}^{n} p(y_i | \bm{\theta}) = \prod_{i=1}^{n} \exp{-\lambda_i(\bm{\theta})}\dfrac{\lambda_i^{y_i}(\bm{\theta})}{y_i!} = \exp\left({-\sum_{i=1}^{n}\lambda_i(\bm{\theta})}\right)\prod_{i=1}^{n}\dfrac{\lambda_i^{y_i}(\bm{\theta})}{y_i!}.
+    P(\bm{Y} = \bm{y} | \bm{\Theta} = \bm{\theta}) = \prod_{i=1}^{n} p(y_i | \bm{\theta}) = \prod_{i=1}^{n}\dfrac{\lambda_i^{y_i}(\bm{\theta})}{y_i!}\exp{-\lambda_i(\bm{\theta})} = \exp\left({-\sum_{i=1}^{n}\lambda_i(\bm{\theta})}\right)\prod_{i=1}^{n}\dfrac{\lambda_i^{y_i}(\bm{\theta})}{y_i!}.
 \end{align}
 
 Perhaps of more practical interest is the log likelihood function
@@ -102,15 +104,16 @@ Perhaps of more practical interest is the log likelihood function
     \log P(\bm{Y} = \bm{y} | \bm{\Theta} = \bm{\theta}) = \sum_{i=1}^{n}\left(- \lambda_i(\bm{\theta}) + y_i\log\lambda_i(\bm{\theta}) - \log y_i !\right).
 \end{equation}
 
-Then, the MLE can be formulated as the following optimization problem
+Then, the MLE can be formulated as
 \begin{align}
     \bm{\theta}^{*}(\bm{y}) = \argmin_{\bm{\theta} \in \Lambda} \sum_{i=1}^{n}\left(\lambda_i(\bm{\theta}) - y_i\log\lambda_i(\bm{\theta})\right),
 \end{align}
-which inevitably requires the solution of the following system of differential equations
+which must satisfy the following system of differential equations
 \begin{equation}
-    \sum_{i=1}^{n}\dfrac{\partial \lambda_i(\bm{\theta})}{\partial \theta_j}\left(1 - \dfrac{y_i}{\lambda_i(\bm{\theta})} \right)\Bigr|_{\substack{\bm{\theta}=\bm{\theta}^{*}(\bm{y})}} = 0,~\mathrm{for}~j=1, 2, ..., m.
+    \sum_{i=1}^{n}\dfrac{\partial \lambda_i(\bm{\theta})}{\partial \theta_j}\left(1 - \dfrac{y_i}{\lambda_i(\bm{\theta})} \right)\Bigr|_{\substack{\bm{\theta}=\bm{\theta}^{*}(\bm{y})}} = 0,~\mathrm{for}~j=1, 2, ..., p,
     \label{eq:partial_eqs}
 \end{equation}
+assuming that $\bm{\theta}^{*}(\bm{y})$ is an interior point of $\Lambda$.
 
 Now, assume that the vector of stellar parameters $\bm{\theta}$ takes the following form $\bm{\theta} \triangleq (\alpha, \bm{x})$, where $\alpha$ is the total number of counts and $\bm{x} \triangleq (x_1, x_2)$ is the coordinate of the center of the PSF. Further, assume that the PSF model can be factorized as follows
 \begin{equation}
@@ -133,12 +136,14 @@ Substituting (\ref{eq:psf_model}) and (\ref{eq:partial_flux}) into (\ref{eq:part
     \label{eq:tada}
 \end{align}
 
-Furthermore, computing the derivative of the left hand side of~(\ref{eq:partial_eqs}), \textit{i.e.}, the second-order derivative of the negative of the log likelihood function, with respect to $\alpha$, and evaluating it at $\alpha^{*}$, it follows that
+Furthermore, computing the derivative of the left hand side of~(\ref{eq:partial_eqs}), \textit{i.e.},
+the second-order derivative of the negative of the log likelihood function, with respect to $\alpha$,
+and evaluating it at $\alpha^{*}$, it follows that
 \begin{align}
     \sum_{i=1}^{n}\left\{\dfrac{\partial^2 \lambda_i\left(\bm{\theta}\right)}{\partial \alpha^2}
     - \dfrac{y_i}{\lambda_i\left(\bm{\theta}\right)}\left[\dfrac{\partial^2 \lambda_i
     \left(\bm{\theta}\right)}{\partial \alpha^2} - \dfrac{1}{\lambda_i\left(\bm{\theta}\right)}
-    \left(\dfrac{\partial \lambda_i\left(\bm{\theta}\right)}{\partial \alpha}\right)^2\right]\Bigr|_{\substack{\bm{\alpha}=\bm{\alpha}^{*}}}\right\} = \sum_{i=1}^{n}\dfrac{y_i}{\alpha^2}\Bigr|_{\substack{\bm{\alpha}=\bm{\alpha}^{*}}} = \dfrac{1}{\alpha^{*}} > 0
+    \left(\dfrac{\partial \lambda_i\left(\bm{\theta}\right)}{\partial \alpha}\right)^2\right]\right\}\Bigr|_{\substack{\alpha=\alpha^{*}}} = \sum_{i=1}^{n}\dfrac{y_i}{\alpha^2}\Bigr|_{\substack{\alpha=\alpha^{*}}} = \dfrac{1}{\alpha^{*}} > 0
     \label{eq:partial2_eqs}
 \end{align}
 which proves our proposition. Note that this result does not require any specific structural form of $\lambda_i$ other than it increases linearly with the total number of counts $\alpha$ for a given fixed position $\bm{x}$.
@@ -153,7 +158,7 @@ Note that, under the widely adopted assumption that the data is Gaussian distrib
 \begin{equation}
     \alpha^{*} = \dfrac{\sum_{i=1}^{n}y_i \psi_i(\bm{x}^{*})}{\sum_{i=1}^{n}\psi^2_i(\bm{x}^{*})},
 \end{equation}
-for which, properties (I) and (II) do not hold in an non-asymptotic sense.
+for which, properties (I) and (II) are not known to hold.
 
 It is worth noticing that, whenever the number of counts is high (which often is the case around the center of the PSF), the Poisson density does converge to a Gaussian density, and therefore those two approaches are equivalent.
 
