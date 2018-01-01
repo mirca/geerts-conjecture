@@ -49,40 +49,30 @@ Chicago, 5640 S. Ellis Ave, Chicago, IL 60637, USA}
 
 %% Start the main body of the article. If no sections in the
 %% research note leave the \section call blank to make the title.
-\section{Introduction}
+\section{}
 
 Stellar photometry from charged-couple devices is at the core of astronomical
 observations. Often it is the case where the astronomical object of interest is isolated
-and photometry can be performed by carefully selecting an aperture around the object
-and summing up the pixel values, a procedure known as aperture photometry. In crowded regions,
-conversely, targets are not disjoint and therefore one has to employ point spread
-function (PSF) photometry in order to obtain meaningful information about the targets
-of interest~\citep{heasley:1999}. PSF photometry can also be applied to
-isolated targets in order to obtain not only photometry, but also precise positional
-information.
+so that aperture photometry can be performed. In crowded regions,
+conversely, targets are not disjoint and therefore point spread
+function (PSF) photometry is the principled way to obtain meaningful measurements~\citep{heasley:1999}.
 
-\section{PSF Photometry as a Probabilistic Estimation Problem}
+PSF photometry consists of fitting the parameters of the PSF to a given image.
+In many scientific analsysis, due to implications of the Central Limit
+Theorem~\citep{grimmett:2001}, the $\chi^2$ statistic has been traditionally
+and successfully used to estimate parameters.
 
-PSF photometry consists of fitting the parameters of the PSF
-(usually integrated flux and center positions), regardless of the nature of the
-PSF (discrete or continuous), to a given image. In many scientific analsysis,
-due to implications of the Central Limit Theorem~\citep{grimmett:2001}, the
-$\chi^2$ statistic has been traditionally and successfully used to estimate
-maximum likelihood (ML) parameters.
-
-In this letter, we advocate that
-the $\chi^2$ statistic might not be adequate for PSF photometry for two main
+In this letter, we advocate that the $\chi^2$ statistic might not be adequate for PSF photometry for two main
 reasons: (I) the assumption of Gaussian distributed data is only compatible with
-the nature of pixel data, i.e., positive integer values, in an assymptotic
-sense; (II) the $\chi^2$ statistic yields a maximum likelihood estimator for the
+the nature of pixel data in an assymptotic sense;
+(II) the $\chi^2$ statistic yields a maximum likelihood estimator (MLE) for the
 total number of counts which is biased, and therefore it is only compatible
 with aperture photometry in an assymptotic sense.
 
 On the other hand, we report that under Poissonian data distributed assumption, and for a very
-general family of PSF models including, e.g., Gaussian models and discrete models,
-the total number of counts obtained using PSF photometry, employing the maximum likelihood
-estimator, is equivalent to aperture photometry. As it will be shown, this equivalency is not
-valid, e.g., if Gaussian distributed data is assumed.
+general family of PSF models, the total number of counts obtained using PSF photometry,
+employing the maximum likelihood estimator, is equivalent to aperture photometry.
+As it will be shown, this equivalency is not valid if Gaussian distributed data is assumed.
 
 We begin by stating the underlying statistical assumptions.
 Given an image as a collection of $n$ independent \emph{non-identically}
@@ -164,12 +154,12 @@ It is worth noticing that, whenever the number of counts is high (which often is
 
 However, for pixels at the tail of the PSF or low signal-to-noise targets, where the number of counts is small, the Gaussian approximation might yield residuals that are nonnegligeble for practical scenarios such as transit photometry.
 
-As a practical exercise, we apply PSF photometry on the target \texttt{EPIC10053146} of NASA's Kepler Mission. \texttt{EPIC10053146} is a 20th magnitude isolated star. NASA's Kepler data on \texttt{EPIC10053146} has measured an average flux of $260 e^{-}/s$ in the brightest pixel.
+As a practical exercise, we apply PSF photometry on the target \texttt{EPIC10053146} of NASA's Kepler Mission. \texttt{EPIC10053146} is a 20th magnitude isolated star which has an average flux of $260 e^{-}s^{-1}$ in the brightest pixel.
 
 Using the assumption that the data is Poisson distributed, we obtain a mean residual value at
-the two brightest pixels across 4000 cadences of $9.35~\rpm~4.45~e^{-}/s$. The same analysis
-with Gaussian likelihood assumption yields $10.11~\rpm~5.76~e^{-}/s$. The mean residuals
-considering all 30 pixels was $-2.25\cdot 10^{-5}~\rpm~12.58~e^{-}/s~$, and $0.99~\rpm~12.59~e^{-}/s~$
+the two brightest pixels across 4000 cadences of $9.35~\rpm~4.45~e^{-}s^{-1}$. The same analysis
+with Gaussian likelihood assumption yields $10.11~\rpm~5.76~e^{-}s^{-1}$. The mean residuals
+considering all 30 pixels was $-2.25\cdot 10^{-5}~\rpm~12.58~e^{-}s^{-1}~$, and $0.99~\rpm~12.59~e^{-}s^{-1}~$
 for the Poisson and Gaussian assumptions, respectively.
 
 \acknowledgments We would like to thank... This work acknowledges the use of the following computational tools: \texttt{numpy}~\citep{numpy}, \texttt{scipy}~\citep{scipy}, \texttt{astropy}~\citep{astropy}, \texttt{pyke}~\citep{pyke}, and \texttt{jupyter}~\citep{jupyter}.
