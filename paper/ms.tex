@@ -35,7 +35,7 @@ Chicago, 5640 S. Ellis Ave, Chicago, IL 60637, USA}
 \affiliation{NASA Ames Research Center, Moffett Blvd, Mountain View, CA 94035, USA}
 \affiliation{Bay Area Environmental Research Institute, 625 2nd St Ste. 209, Petaluma, CA 94952}
 
-\author{Benjamin Montet}
+\author{Benjamin T. Montet}
 \altaffiliation{\sagan}
 \affiliation{\chicago}
 
@@ -68,9 +68,11 @@ for PSF photometry for two main reasons: (I) the assumption of Gaussian
 distributed data is only compatible with the nature of pixel data in an
 assymptotic sense; (II) the $\chi^2$ statistic yields a maximum likelihood
 estimator (MLE) for the total number of counts which is biased, and therefore
-it is only compatible with aperture photometry in an assymptotic sense.
+it is only compatible with aperture photometry in an assymptotic sense. 
+\zetodo{This is redundant, you could save some words here by rearranging 
+so you don't say "in an assymptotic sense" twice}
 
-On the other hand, we report that under Poissonian data distributed assumption,
+Here, we report that under Poissonian data distributed assumptions,
 and for a very general family of PSF models, the total number of counts
 obtained using PSF photometry, employing the maximum likelihood estimator, is
 equivalent to aperture photometry. As it will be shown, this equivalency is not
@@ -207,6 +209,11 @@ assumption yields $10.11~\rpm~5.76~e^{-}s^{-1}$. The mean residuals
 considering all 30 pixels was $-2.25\cdot 10^{-5}~\rpm~12.58~e^{-}s^{-1}~$,
 and $0.99~\rpm~12.59~e^{-}s^{-1}~$ for the Poisson and Gaussian assumptions,
 respectively.
+\zetodo{I realize you're bumping up against the word limit, but a figure is essential here!
+One showing the residuals.
+It can have a very spartan caption. To fit it in, you could condense the entire second paragraph of 
+this note down to ``The \chi^2 statistic is often used in PSF parameter estimation.'' at combining it
+with the now-third paragraph}
 
 \acknowledgments This work acknowledges the use of the following computational
 tools: \texttt{numpy}~\citep{numpy}, \texttt{scipy}~\citep{scipy},
@@ -214,6 +221,8 @@ tools: \texttt{numpy}~\citep{numpy}, \texttt{scipy}~\citep{scipy},
 and \texttt{jupyter}~\citep{jupyter}.
 A \texttt{jupyter} notebook intented to reproduce the example aforementioned is
 available at: \url{https://www.github.com/mirca/geerts-conjecture}.
+Work by B.T.M. was performed under contract with the Jet Propulsion Laboratory (JPL) funded by 
+NASA through the Sagan Fellowship Program executed by the NASA Exoplanet Science Institute.
 
 \begin{thebibliography}{}
     \bibitem[Heasley(1999)]{heasley:1999} Heasley, J.~N., Point-Spread Function
