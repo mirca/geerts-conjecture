@@ -3,6 +3,5 @@
 *.bbl
 .*.swo
 *.blg
-*.pdf
 .*.swp
 .ipynb_checkpoints/
